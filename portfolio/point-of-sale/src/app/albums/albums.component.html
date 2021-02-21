@@ -1,1 +1,7 @@
-<p>albums works!</p>
+<div *ngFor="let album of albums">
+  <div class="artist">{{ album.artistName }}</div>
+  <div class="album">{{ album.albumName }}</div>
+  <div class="art">{{ album.albumArtSource }}</div>
+  <!-- <img [src]="album.albumArtSource" alt="" /> -->
+  <div class="price">{{ album.price | currency }}</div>
+</div>

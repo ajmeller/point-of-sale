@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Album } from '../shared/models/album.interface';
 import { AlbumsApiService } from '../shared/services/albums-api.service';
 
 @Component({
@@ -8,14 +8,24 @@ import { AlbumsApiService } from '../shared/services/albums-api.service';
   styleUrls: ['./albums.component.css'],
 })
 export class AlbumsComponent implements OnInit {
-  constructor(
-    private albumsService: AlbumsApiService,
-    private router: Router
-  ) {}
+  constructor(private albumsService: AlbumsApiService) {}
+
+  get albums(): Album[] {
+    return this.albumsService.albums;
+  }
 
   getAlbums() {
     this.albumsService.getAllAlbums().subscribe((data: any) => {
-      console.log(data);
+      data.forEach((a: any) => {
+        const album = {
+          id: a.id,
+          artistName: a.artistname,
+          albumName: a.albumname,
+          albumArtSource: a.albumartsource,
+          price: a.price,
+        };
+        this.albumsService.albums.push(album);
+      });
     });
   }
 
