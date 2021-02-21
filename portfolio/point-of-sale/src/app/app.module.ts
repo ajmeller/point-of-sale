@@ -5,15 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
-import { TempFormComponent } from './temp-form/temp-form.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
+import { AlbumsComponent } from './albums/albums.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CartComponent,
-    TempFormComponent,
     CartItemComponent,
+    AlbumsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
