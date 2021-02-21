@@ -9,7 +9,7 @@ import { CartItem } from '../shared/models/cart-item.interface';
 export class CartItemComponent implements OnInit {
   constructor() {}
 
-  @Input() cartItem: CartItem = { product: '', price: 0, quantity: 0 };
+  @Input() cartItem: CartItem = { id: 0, albumId: 0, quantity: 0 };
 
   ngOnInit(): void {}
 }

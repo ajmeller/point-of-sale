@@ -16,7 +16,15 @@ export class CartComponent implements OnInit {
 
   getCart(): void {
     this.cartService.getAllItems().subscribe((data: any) => {
-      this.cartService.cart = data;
+      data.forEach((i: any) => {
+        const cartItem: CartItem = {
+          id: i.id,
+          quantity: i.quantity,
+          albumId: i.albumid,
+        };
+
+        this.cartService.cart.push(cartItem);
+      });
     });
   }
 

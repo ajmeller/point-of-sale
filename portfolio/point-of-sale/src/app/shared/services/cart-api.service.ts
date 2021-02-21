@@ -9,7 +9,7 @@ import { CartItem } from '../models/cart-item.interface';
 export class CartApiService {
   constructor(private http: HttpClient) {}
 
-  apiUrl: string = 'http://localhost:3000/cart-items';
+  apiUrl: string = 'http://localhost:3000/cart';
 
   cart: CartItem[] = [];
 
@@ -18,10 +18,14 @@ export class CartApiService {
   }
 
   deleteItem(id: number) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.post(`${this.apiUrl}/delete/${id}`, {});
   }
 
   addItem(item: CartItem) {
-    return this.http.post(this.apiUrl, item);
+    return this.http.post(`${this.apiUrl}/add`, item);
+  }
+
+  editItem(id: number, item: CartItem) {
+    return this.http.post(`${this.apiUrl}/update/${id}`, item);
   }
 }

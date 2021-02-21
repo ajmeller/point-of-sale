@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { AlbumsComponent } from './albums/albums.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AlbumsComponent } from './albums/albums.component';
     CartComponent,
     CartItemComponent,
     AlbumsComponent,
+    NavigationComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
