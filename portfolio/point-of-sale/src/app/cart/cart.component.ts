@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Album } from '../shared/models/album.interface';
+import { CartAlbum } from '../shared/models/cart-album.interface';
 import { CartItem } from '../shared/models/cart-item.interface';
+import { AlbumsApiService } from '../shared/services/albums-api.service';
 import { CartApiService } from '../shared/services/cart-api.service';
 
 @Component({
@@ -8,27 +11,39 @@ import { CartApiService } from '../shared/services/cart-api.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  constructor(private cartService: CartApiService) {}
+  constructor(
+    private albumsService: AlbumsApiService,
+    private cartService: CartApiService
+  ) {}
 
   get cartItems(): CartItem[] {
     return this.cartService.cart;
   }
 
-  getCart(): void {
-    this.cartService.getAllItems().subscribe((data: any) => {
-      data.forEach((i: any) => {
-        const cartItem: CartItem = {
-          id: i.id,
-          quantity: i.quantity,
-          albumId: i.albumid,
-        };
-
-        this.cartService.cart.push(cartItem);
-      });
-    });
+  get cartAlbums(): CartAlbum[] {
+    return this.cartService.cartAlbums;
   }
 
+  /*   cartItemToAlbum(cartItem: CartItem) {
+    const album: Album = this.albumsService.albums.find((o) => {
+      return (o.id = cartItem.albumId);
+    });
+
+    const newCartAlbum: CartAlbum = {
+      cartId: cartItem.id,
+      quantity: cartItem.quantity,
+      albumId: cartItem.albumId,
+      artistName: album.artistName,
+      albumName: album.albumName,
+      albumArtSource: album.albumArtSource,
+      price: album.price,
+    };
+
+    this.cartService.cartAlbums.push(newCartAlbum);
+  } */
+
   ngOnInit(): void {
-    this.getCart();
+    this.cartService.cart = [];
+    this.cartService.getCart();
   }
 }

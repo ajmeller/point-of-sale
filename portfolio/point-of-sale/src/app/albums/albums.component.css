@@ -1,0 +1,26 @@
+.albums-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: 40px 20px;
+}
+
+.album-container {
+  margin: 20px;
+  cursor: pointer;
+}
+
+.album-art {
+  border-radius: 10px;
+  height: 300px;
+  width: 300px;
+}
+
+.artist-name {
+  margin: 5px 0px 2px 0px;
+  font-size: 20px;
+}
+
+.album-price {
+  margin-top: 10px;
+}

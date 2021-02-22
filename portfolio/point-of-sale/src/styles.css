@@ -5,7 +5,15 @@ body {
 
 body {
   margin: 0px;
-  background-color: rgb(194, 215, 255);
-
+  background-color: rgb(214, 225, 245);
   font-family: "Merriweather", sans-serif;
+  color: #232a3e;
+}
+
+a {
+  color: #232a3e;
+}
+
+a:visited {
+  color: #232a3e;
 }

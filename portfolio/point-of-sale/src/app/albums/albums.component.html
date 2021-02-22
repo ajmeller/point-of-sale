@@ -1,7 +1,12 @@
-<div *ngFor="let album of albums">
-  <div class="artist">{{ album.artistName }}</div>
-  <div class="album">{{ album.albumName }}</div>
-  <div class="art">{{ album.albumArtSource }}</div>
-  <!-- <img [src]="album.albumArtSource" alt="" /> -->
-  <div class="price">{{ album.price | currency }}</div>
+<div class="albums-container">
+  <div
+    *ngFor="let album of albums"
+    class="album-container"
+    (click)="addToCart(album)"
+  >
+    <img [src]="album.albumArtSource" alt="album art" class="album-art" />
+    <div class="artist-name">{{ album.artistName }}</div>
+    <div class="album-name">{{ album.albumName }}</div>
+    <div class="album-price">{{ album.price | currency }}</div>
+  </div>
 </div>
