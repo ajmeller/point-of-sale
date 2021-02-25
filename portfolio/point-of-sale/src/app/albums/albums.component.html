@@ -2,7 +2,7 @@
   <div
     *ngFor="let album of albums"
     class="album-container"
-    (click)="addToCart(album)"
+    (click)="addToCart(album.id)"
   >
     <img [src]="album.albumArtSource" alt="album art" class="album-art" />
     <div class="artist-name">{{ album.artistName }}</div>

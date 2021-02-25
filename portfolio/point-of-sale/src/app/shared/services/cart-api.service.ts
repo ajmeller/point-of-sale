@@ -12,37 +12,49 @@ export class CartApiService {
 
   apiUrl: string = 'http://localhost:3000/cart';
 
-  cart: CartItem[] = [];
+  cartItems: CartItem[] = [];
   cartAlbums: CartAlbum[] = [];
 
   getAllItems(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
 
-  deleteItem(id: number) {
+  deleteItem(id: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/delete/${id}`, {});
   }
 
-  addItem(item: CartItem) {
+  addItem(item: {}): Observable<any> {
     return this.http.post(`${this.apiUrl}/add`, item);
   }
 
-  editItem(id: number, item: CartItem) {
+  editItem(item: {}, id: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/update/${id}`, item);
   }
 
-  getCart(): void {
-    this.getAllItems().subscribe((data: any) => {
-      data.forEach((i: any) => {
-        const cartItem: CartItem = {
-          id: i.id,
-          quantity: i.quantity,
-          albumId: i.albumid,
-        };
+  setCart(data: any) {
+    data.forEach((c: any) => {
+      const cartItem: CartItem = {
+        id: c.cartid,
+        quantity: c.quantity,
+        albumId: c.albumid,
+      };
 
-        this.cart.push(cartItem);
-        //this.cartItemToAlbum(cartItem);
-      });
+      const cartAlbum: CartAlbum = {
+        cartItem: cartItem,
+        artistName: c.artistname,
+        albumName: c.albumname,
+        albumArtSource: c.albumartsource,
+        price: c.price,
+      };
+
+      this.cartItems.push(cartItem);
+      this.cartAlbums.push(cartAlbum);
+    });
+  }
+
+  getCart() {
+    this.getAllItems().subscribe((data) => {
+      this.setCart(data);
     });
   }
 }

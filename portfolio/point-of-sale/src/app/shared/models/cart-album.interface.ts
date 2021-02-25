@@ -1,7 +1,7 @@
+import { CartItem } from './cart-item.interface';
+
 export interface CartAlbum {
-  cartId: number;
-  albumId: number;
-  quantity: number;
+  cartItem: CartItem;
   artistName: string;
   albumName: string;
   albumArtSource: string;

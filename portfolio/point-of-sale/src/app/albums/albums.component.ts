@@ -19,11 +19,15 @@ export class AlbumsComponent implements OnInit {
     return this.albumsService.albums;
   }
 
+  get cartItems(): CartItem[] {
+    return this.cartService.cartItems;
+  }
+
   getAlbums() {
     this.albumsService.getAllAlbums().subscribe((data: any) => {
       data.forEach((a: any) => {
         const album = {
-          id: a.id,
+          id: a.albumid,
           artistName: a.artistname,
           albumName: a.albumname,
           albumArtSource: a.albumartsource,
@@ -34,27 +38,30 @@ export class AlbumsComponent implements OnInit {
     });
   }
 
-  addToCart(album: Album) {
-    const cart = this.cartService.cart;
-    const cartItem = cart.find((o) => {
-      return o.albumId === album.id;
+  addToCart(albumId: number) {
+    const cartItem = this.cartService.cartItems.find((o) => {
+      return o.albumId === albumId;
     });
 
     if (cartItem) {
-      this.cartService.editItem(cartItem.id, {
-        id: cartItem.id,
-        quantity: cartItem.quantity + 1,
-        albumId: cartItem.albumId,
-      });
-      console.log('edit cart item');
+      this.cartService
+        .editItem(
+          {
+            cartid: cartItem.id,
+            quantity: cartItem.quantity + 1,
+            albumid: cartItem.albumId,
+          },
+          cartItem.id
+        )
+        .subscribe((data: any) => {
+          console.log(data);
+
+          this.cartService.getCart();
+        });
     } else {
-      const newCartItem: CartItem = {
-        id: 3,
-        quantity: 1,
-        albumId: album.id,
-      };
-      this.cartService.addItem(newCartItem);
-      console.log('add to cart');
+      this.cartService
+        .addItem({ quantity: 1, albumid: albumId })
+        .subscribe(() => {});
     }
   }
 
